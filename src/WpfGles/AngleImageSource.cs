@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using Microsoft.Wpf.Interop.DirectX;
 using OpenTK.Graphics.ES30;
 using WpfGles.Interop;
 
@@ -28,7 +29,7 @@ namespace WpfGles
         private IntPtr _d3d_surface;
         private bool _disposed;
         private IntPtr _egl_surface;
-        private D3DImage _image;
+        private D3D11Image _image;
 
         public AngleImageSource()
         {
@@ -136,7 +137,7 @@ namespace WpfGles
         private void SetSharedSurfaceToD3DImage()
         {
             _image.Lock();
-            _image.SetBackBuffer(D3DResourceType.IDirect3DSurface9, _d3d_surface);
+            _image.SetBackBuffer(D3DResourceType.IDirect3DSurface9, _d3d_surface, true);
             _image.AddDirtyRect(new Int32Rect(0, 0, _image.PixelWidth, _image.PixelHeight));
             _image.Unlock();
         }
@@ -180,9 +181,8 @@ namespace WpfGles
             {
                 return;
             }
-
-            var dpi = _shared.Dpi;
-            _image = new D3DImage(dpi.DpiX, dpi.DpiY);
+            
+            _image = new D3D11Image();
         }
     }
 }

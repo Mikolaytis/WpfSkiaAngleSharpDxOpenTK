@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.ES30;
-using OpenTK.Platform;
 using OpenTK.Platform.Egl;
-using SharpDX.Direct3D9;
+using SharpDX.Direct3D11;
 
 namespace WpfGles.Interop
 {
@@ -27,7 +25,7 @@ namespace WpfGles.Interop
         private readonly D3D9Interop _d3d9_interop;
         private readonly Dpi _dpi;
         private bool _disposed;
-        private Texture _texture;
+        private Texture2D _texture;
         private IList<AngleImageSource> _sources = new List<AngleImageSource>();
 
         public D3DAngleInterop()
@@ -50,6 +48,7 @@ namespace WpfGles.Interop
             var win = OpenTK.Platform.Utilities.CreateWindowsWindowInfo(_control.Handle);
             _window_info = OpenTK.Platform.Utilities.CreateAngleWindowInfo(win);
             _context = new GraphicsContext(mode, _window_info, major, minor, flags);
+            _context.MakeCurrent(_window_info);
             _context.LoadAll();
         }
 
@@ -111,7 +110,7 @@ namespace WpfGles.Interop
         {
             var ptr = _window_info.QuerySurfacePointer(egl_surface);
             _texture = _d3d9_interop.CreateNewSharedTexture(ptr, width, height);
-            return _texture.GetSurfaceLevel(0).NativePointer;
+            return _texture.NativePointer;
         }
 
         public IntPtr CreateOffscreenSurface(int width, int height)
