@@ -16,10 +16,7 @@ namespace WpfGles.Interop
             _device_ex = MakeDevice();
         }
 
-        public IntPtr Pointer
-        {
-            get { return _texture.GetSurfaceLevel(0).NativePointer; }
-        }
+        public IntPtr Pointer => _texture.GetSurfaceLevel(0).NativePointer;
 
         /// <summary>
         ///     Creates a new Direct3D9 Ex device, required for efficient

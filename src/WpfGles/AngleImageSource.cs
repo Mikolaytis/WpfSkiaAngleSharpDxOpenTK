@@ -49,10 +49,7 @@ namespace WpfGles
             Dispose(false);
         }
 
-        public ImageSource Source
-        {
-            get { return _image; }
-        }
+        public ImageSource Source => _image;
 
         public void PreRender()
         {
@@ -110,10 +107,7 @@ namespace WpfGles
         {
         }
 
-        public IReadOnlyDpi Dpi
-        {
-            get { return _shared.Dpi; }
-        }
+        public IReadOnlyDpi Dpi => _shared.Dpi;
 
         public void SetupDpi(Visual v)
         {

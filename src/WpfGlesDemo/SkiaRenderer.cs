@@ -22,8 +22,12 @@ namespace WpfGlesDemo
         {
             _surface.Canvas.DrawColor(SKColors.Blue);
             var img = _img ?? (_img = SKImage.FromEncodedData(File.ReadAllBytes("fail.png")));
-            _surface.Canvas.RotateDegrees(10f);
-            _surface.Canvas.DrawImage(img, 200,200);
+            _surface.Canvas.RotateDegrees(1f, _renderTarget.Width / 2, _renderTarget.Height / 2);
+            _surface.Canvas.DrawImage(img, new SKRect(
+                _renderTarget.Width / 4, 
+                _renderTarget.Height / 4, 
+                _renderTarget.Width / 4 * 3, 
+                _renderTarget.Height / 4 * 3));
             _surface.Canvas.Flush();
         }
 

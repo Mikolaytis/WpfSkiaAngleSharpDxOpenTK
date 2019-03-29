@@ -11,11 +11,9 @@ namespace WpfGles
 {
     public class GlesImage : Image
     {
-        private static bool? _is_in_design_mode;
         private static BitmapImage _dummy;
         private bool _rendering_enabled;
         private bool _reset_back_buffer;
-        private IGlesRenderer _gles_renderer;
 
         public GlesImage()
         {
@@ -25,67 +23,19 @@ namespace WpfGles
             LoadDummyImage();
         }
 
-        public IGlesRenderer GlesRenderer
-        {
-            get { return _gles_renderer; }
-            set
-            {
-                SetGlesRenderer(value);
-            }
-        }
-
-
-        private void SetGlesRenderer(IGlesRenderer gles_renderer)
-        {
-            _gles_renderer = gles_renderer;
-            if (_gles_renderer != null)
-            {
-                Render = (bool force_redraw) =>
-                {
-                    ImageSource.PreRender();
-                    _gles_renderer.Render(force_redraw);
-                    ImageSource.PostRender();
-                };
-            }
-            else
-            {
-                Render = (x) => { ImageSource.DummyRender();};
-            }
-        }
-
-        public static bool IsInDesignMode
-        {
-            get
-            {
-                if (!_is_in_design_mode.HasValue)
-                {
-                    _is_in_design_mode =
-                        (bool)
-                            DependencyPropertyDescriptor.FromProperty(DesignerProperties.IsInDesignModeProperty,
-                                typeof (FrameworkElement)).Metadata.DefaultValue;
-                }
-
-                return _is_in_design_mode.Value;
-            }
-        }
+        public IGlesRenderer GlesRenderer { get; set; }
 
         private IAngleImageSource ImageSource { get; set; }
 
         private void LoadDummyImage()
         {
-            if (IsInDesignMode)
-            {
-                return;
-            }
-
             if (_dummy != null)
             {
                 Source = _dummy;
                 return;
             }
-
-            var asm = Assembly.GetCallingAssembly();
-            var img = LoadEmbedded.File(asm, "WpfGles.fail.png");
+            
+            var img = File.ReadAllBytes("fail.png");
 
             _dummy = new BitmapImage();
 
@@ -100,30 +50,15 @@ namespace WpfGles
 
             Source = _dummy;
         }
-
-        public BitmapImage Dummy
-        {
-            get { return _dummy; }
-        }
-
+        
         private void OnLoaded(object sender, RoutedEventArgs event_args)
         {
-            if (IsInDesignMode)
-            {
-                return;
-            }
-
             _reset_back_buffer = true;
             StartRendering();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs event_args)
         {
-            if (IsInDesignMode)
-            {
-                return;
-            }
-
             StopRendering();
             Source = null;
         }
@@ -199,9 +134,7 @@ namespace WpfGles
                 ImageSource.DummyRender();
             }
         }
-
-        private Action<bool> Render { get; set; }
-
+        
         protected override void OnRenderSizeChanged(SizeChangedInfo size_info)
         {
             _reset_back_buffer = true;

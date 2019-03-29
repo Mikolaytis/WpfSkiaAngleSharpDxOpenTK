@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Media;
-using OpenTK.Platform.Egl;
 using WpfGles.Interop;
 
 namespace WpfGles
@@ -20,43 +19,29 @@ namespace WpfGles
 
     public class Dpi : IDpi
     {
-        private double _dpi_x = 96.0;
-        private double _dpi_y = 96.0;
-        private double _scale_x = 1.0;
-        private double _scale_y = 1.0;
-
         public void SetVisual(Visual v)
         {
             var source = PresentationSource.FromVisual(v);
 
-            if (source == null || source.CompositionTarget == null)
+            if (source?.CompositionTarget == null)
             {
                 throw new AngleInteropException("Cannot determine dpi.");
             }
 
             var m = source.CompositionTarget.TransformToDevice;
 
-            _scale_x = m.M11;
-            _scale_y = m.M22;
-            _dpi_x = 96.0 * _scale_x;
-            _dpi_y = 96.0 * _scale_y;
+            ScaleX = m.M11;
+            ScaleY = m.M22;
+            DpiX = 96.0 * ScaleX;
+            DpiY = 96.0 * ScaleY;
         }
 
-        public double ScaleX
-        {
-            get { return _scale_x; }
-        }
-        public double ScaleY
-        {
-            get { return _scale_y; }
-        }
-        public double DpiX
-        {
-            get { return _dpi_x; }
-        }
-        public double DpiY
-        {
-            get { return _dpi_y; }
-        }
+        public double ScaleX { get; private set; } = 1.0;
+
+        public double ScaleY { get; private set; } = 1.0;
+
+        public double DpiX { get; private set; } = 96.0;
+
+        public double DpiY { get; private set; } = 96.0;
     }
 }

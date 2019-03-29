@@ -101,18 +101,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AngleImageSource.cs" />
-    <Compile Include="DemoRenderer.cs" />
     <Compile Include="Interop\D3DAngleInterop.cs" />
     <Compile Include="Interop\AngleInteropException.cs" />
     <Compile Include="Interop\D3D9Interop.cs" />
     <Compile Include="Util\Dpi.cs" />
     <Compile Include="IGlesRenderer.cs" />
-    <Compile Include="Util\LoadEmbedded.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GlesImage.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="fail.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\ext\d3dcompiler_47.dll">
@@ -135,6 +130,9 @@
       <Link>libGLESv2.pdb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="fail.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

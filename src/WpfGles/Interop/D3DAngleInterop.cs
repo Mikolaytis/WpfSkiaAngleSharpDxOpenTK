@@ -53,15 +53,9 @@ namespace WpfGles.Interop
             _context.LoadAll();
         }
 
-        public IDpi Dpi
-        {
-            get { return _dpi; }
-        }
+        public IDpi Dpi => _dpi;
 
-        private IGraphicsContext Context
-        {
-            get { return _context; }
-        }
+        private IGraphicsContext Context => _context;
 
         public void AddUser(AngleImageSource source)
         {
