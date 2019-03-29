@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>WpfGles-Full</id>
+        <version>1.0.0.0</version>
+        <authors>Jonas Boesch</authors>
+        <owners>Jonas Boesch</owners>
+        <projectUrl>https://git.sonova.com/11jboesch/WpfGles</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>This package contains the WpfGles library in addition to pre-release OpenTK and Angle dependencies.</description>
+        <releaseNotes />
+        <copyright>Copyright 2015</copyright>
+        <tags>OpenGL OpenGLES GLES Angle OpenTK Graphics Rendering</tags>
+		<dependencies>
+		  <dependency id="Baseclass.Contrib.Nuget.Output" />
+  		  <dependency id="SharpDX.Direct3D9" />
+		</dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\WpfGles.dll" target="lib\net\WpfGles.dll" />
+        <file src="bin\Release\WpfGles.dll" target="lib\net\WpfGles.pdb" />
+        <file src="ext\d3dcompiler_47.dll" target="output\d3dcompiler_47.dll" />
+        <file src="ext\libEGL.dll" target="output\libEGL.dll" />
+        <file src="ext\libEGL.pdb" target="output\libEGL.pdb" />
+        <file src="ext\libGLESv2.dll" target="output\libGLESv2.dll" />
+        <file src="ext\libGLESv2.pdb" target="output\libGLESv2.pdb" />
+        <file src="ext\OpenTK.dll" target="lib\net\OpenTK.dll" />
+        <file src="ext\OpenTK.pdb" target="lib\net\OpenTK.pdb" />
+        <file src="ext\OpenTK.xml" target="lib\net\OpenTK.xml" />
+        <file src="ext\OpenTK.GLControl.dll" target="lib\net\OpenTK.GLControl.dll" />
+        <file src="ext\OpenTK.GLControl.pdb" target="lib\net\OpenTK.GLControl.pdb" />
+        <file src="ext\OpenTK.GLControl.xml" target="lib\net\OpenTK.GLControl.xml" />
+    </files>
+</package>
