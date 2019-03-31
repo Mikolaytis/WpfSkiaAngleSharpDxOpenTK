@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using OpenTK.Graphics.ES30;
+using OpenTK.Graphics.ES20;
 using WpfGles.Interop;
 
 namespace WpfGles
@@ -98,15 +98,7 @@ namespace WpfGles
 
             Renderer?.Resize(width, height);
         }
-
-        public void OnLoaded()
-        {
-        }
-
-        public void OnUnloaded()
-        {
-        }
-
+        
         public IReadOnlyDpi Dpi => _shared.Dpi;
 
         public void SetupDpi(Visual v)
