@@ -45,11 +45,12 @@ namespace WpfGles.Interop
         {
             _d3d9_interop = new D3D9Interop();
             _dpi = new Dpi();
-            
+
             _control = new Control();
             var win = OpenTK.Platform.Utilities.CreateWindowsWindowInfo(_control.Handle);
             _window_info = OpenTK.Platform.Utilities.CreateAngleWindowInfo(win);
             _context = new GraphicsContext(mode, _window_info, major, minor, flags);
+            _context.MakeCurrent(_window_info);
             _context.LoadAll();
         }
 
