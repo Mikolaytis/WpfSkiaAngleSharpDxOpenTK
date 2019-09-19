@@ -1,25 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Graphics.ES30;
-using OpenTK.Platform;
 using OpenTK.Platform.Egl;
 using SharpDX.Direct3D9;
 
 namespace WpfGles.Interop
 {
-    public interface ID3DAngleInterop
-    {
-        void EnsureContext();
-        void MakeCurrent(IntPtr surface);
-        IntPtr CreateOffscreenSurface(int width, int height);
-        void DestroyOffscreenSurface(ref IntPtr surface);
-        IntPtr GetD3DSharedHandleForSurface(IntPtr egl_surface, int width, int height);
-    }
-
-    internal class D3DAngleInterop : ID3DAngleInterop, IDisposable
+    internal class D3DAngleInterop : IDisposable
     {
         private readonly Control _control;
         private readonly GraphicsContext _context;
