@@ -74,11 +74,11 @@ namespace WpfGlesDemo
             _renderTarget = new GRBackendRenderTarget(
                 width: width,
                 height: height,
-                sampleCount: 0,
-                stencilBits: 0,
+                sampleCount: 8,
+                stencilBits: 8,
                 glInfo: glInfo);
             _surface = SKSurface.Create(
-                _context, _renderTarget, GRSurfaceOrigin.BottomLeft, SKColorType.Rgba8888);
+                _context, _renderTarget, GRSurfaceOrigin.TopLeft, SKColorType.Rgba8888);
         }
     }
 }
